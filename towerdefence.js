@@ -10,9 +10,9 @@ var files,
 
 d3.select("#filepicker")
     .on("change", function () {
-        files = Array.from(event.target.files)
-            .filter(function (e) {
-                return (e.name == "JsonMap.json" && e.webkitRelativePath.includes("A - "));
+        files = Array.from(d3.event.target.files)
+            .filter(function (f) {
+                return (f.name == "JsonMap.json" && f.webkitRelativePath.includes("A - "));
             })
             .sort(function (a, b) {
                 var regex = /Round ([0-9]+)\b/;
@@ -21,7 +21,7 @@ d3.select("#filepicker")
                 return (aNum > bNum) ? 1 : -1;
             });
 
-        // index = 0;
+        index = 0;
         loadFile(files[index]);
     });
 
@@ -41,7 +41,8 @@ var loadFile = function (file) {
     var myReader = new FileReader();
 
     myReader.addEventListener("loadend", function (e) {
-        loadMap(JSON.parse(e.srcElement.result));
+        var target = e.target || e.srcElement;        
+        loadMap(JSON.parse(target.result));
     });
     //start the reading process.
     myReader.readAsText(file);
