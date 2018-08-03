@@ -1,26 +1,17 @@
-function buildingClass(options) {
-    let settings = options.settings;
-    let svg = options.svg || d3.select("svg");
-    let buildingTip;
+var Building = (function () {
+    let settings, svg, buildingTip;
 
-    function isBuildings(c) {
-        return (c.buildings && c.buildings.length);
+    /* =============== export public methods =============== */
+    return {
+        init: init,
+        load: load
     }
 
-    function buildingClass(c) {
-        return isBuildings(c) ? c.buildings[0].buildingType.toLowerCase() : "nobuilding";
-    }
+    /* =================== public methods ================== */
+    function init(options) {              
+        svg = options.svg;
+        settings = Settings.getInstance();
 
-    function buildingText(c) {
-        if (isBuildings(c)) {
-            return (c.buildings[0].constructionTimeLeft > 0)
-                ? c.buildings[0].buildingType[0].toLowerCase()
-                : c.buildings[0].buildingType[0].toUpperCase();
-        }
-        return "";
-    }
-
-    function init() {
         buildingTip = d3.tip()
             .attr('class', 'd3-tip')
             .direction(function (c) {
@@ -45,12 +36,6 @@ function buildingClass(options) {
             });
 
         svg.call(buildingTip);
-    }
-
-    init();
-
-    return {
-        load: load
     }
 
     function load(cells, newCells) {
@@ -89,4 +74,22 @@ function buildingClass(options) {
             .select(".buildingText")
             .text(buildingText);
     }
-}
+
+    /* =================== private methods ================= */
+    function isBuildings(c) {
+        return (c.buildings && c.buildings.length);
+    }
+
+    function buildingClass(c) {
+        return isBuildings(c) ? c.buildings[0].buildingType.toLowerCase() : "nobuilding";
+    }
+
+    function buildingText(c) {
+        if (isBuildings(c)) {
+            return (c.buildings[0].constructionTimeLeft > 0)
+                ? c.buildings[0].buildingType[0].toLowerCase()
+                : c.buildings[0].buildingType[0].toUpperCase();
+        }
+        return "";
+    }
+}());

@@ -1,31 +1,17 @@
-function missileClass(options) {
-    let settings = options.settings;
-    let svg = options.svg || d3.select("svg");
-    let missileTip;
+var Missile = (function () {
+    let settings, svg, missileTip;
 
-    function missilesByPlayer(c) {
-        let arr = [];
-        if (c.missiles && c.missiles.length) {
-            settings.players().forEach(player => {
-                let missiles = c.missiles.filter(m => m.playerType == player.playerType);
-                if (missiles.length > 0) {
-                    arr.push({
-                        x: c.x,
-                        y: c.y,
-                        playerType: player.playerType,
-                        missiles: missiles
-                    });
-                }
-            });
-        }
-        return arr;
-    };
+     /* =============== export public methods =============== */
+    return {
+        init: init,
+        load: load
+    }
 
-    function missileRotation(c, i) {
-        return (c.playerType == "A") ? 90 : -90;
-    };
+    /* =================== public methods ================== */
+    function init(options) {         
+        svg = options.svg;
+        settings = Settings.getInstance();
 
-    function init() {
         missileTip = d3.tip()
             .attr('class', 'd3-tip')
             .direction(function (c) {
@@ -48,12 +34,6 @@ function missileClass(options) {
             });
 
         svg.call(missileTip);
-    }
-
-    init();
-
-    return {
-        load: load
     }
 
     function load(cells, newCells) {
@@ -100,4 +80,27 @@ function missileClass(options) {
             .select(".missileText")
             .text((c, i) => c.missiles.length);
     }
-}
+
+    /* =================== private methods ================= */
+    function missilesByPlayer(c) {
+        let arr = [];
+        if (c.missiles && c.missiles.length) {
+            settings.players().forEach(player => {
+                let missiles = c.missiles.filter(m => m.playerType == player.playerType);
+                if (missiles.length > 0) {
+                    arr.push({
+                        x: c.x,
+                        y: c.y,
+                        playerType: player.playerType,
+                        missiles: missiles
+                    });
+                }
+            });
+        }
+        return arr;
+    };
+
+    function missileRotation(c, i) {
+        return (c.playerType == "A") ? 90 : -90;
+    };
+}());

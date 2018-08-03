@@ -1,9 +1,16 @@
-function legendClass(options) {
-    let settings = options.settings;
-    let svg = options.svg || d3.select("svg");
+var Legend = (function () {
+    let settings, svg;
 
+    /* =============== export public methods =============== */
     return {
+        init: init,
         load: load
+    }
+
+    /* =================== public methods ================== */
+    function init(options) {              
+        svg = options.svg || d3.select("svg");
+        settings = Settings.getInstance();
     }
 
     function load(buildingsStats) {
@@ -61,4 +68,4 @@ function legendClass(options) {
                     + " ConstructionScore: " + c.value['constructionScore']
             });
     }
-}
+}());

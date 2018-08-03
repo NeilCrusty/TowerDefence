@@ -1,12 +1,19 @@
-function mapClass(options) {
-    var options = options || {}
-    let settings = options.settings || settingsClass();
-    let parentSelection = options.parentSelection || d3.select("body");
+var GameMap = (function() {
+    var settings, parentSelection, svg, roundText;
+   
+    /* =============== export public methods =============== */
+    return {
+        init : init,
+        load: load
+    };
 
-    let buildings, missiles, legend;
-    let svg, roundText, gameDetails;
+    /* =================== public methods ================== */
+    function init(options) {
+        var options = options || {}
+        parentSelection = options.parentSelection || d3.select("body");
 
-    function init() {
+        settings = Settings.getInstance();        
+
         //Create the SVG element
         svg = parentSelection.append("svg")
             .attr("width", settings.totalWidth())
@@ -29,16 +36,10 @@ function mapClass(options) {
                 .attr("id", "player" + p.playerType + "Text");
         });
 
-        buildings = buildingClass({ settings: settings, svg: svg });
-        missiles = missileClass({ settings: settings, svg: svg });
-        legend = legendClass({ settings: settings, svg: svg });
+        Building.init({ svg: svg });
+        Missile.init({ svg: svg });
+        Legend.init({ svg: svg });
     }
-
-    init();
-
-    return {
-        load: load
-    };
 
     function load(file) {
         settings.update(file);
@@ -46,9 +47,11 @@ function mapClass(options) {
         loadSvg();
         loadTexts();
         loadMap(file.gameMap);
-        legend.load(file.gameDetails.buildingsStats);
+        
+        Legend.load(file.gameDetails.buildingsStats);
     }
 
+    /* =================== private methods ================= */
     function loadSvg() {
         svg
             .attr("width", settings.totalWidth())
@@ -94,9 +97,9 @@ function mapClass(options) {
             .classed("cell", true);
 
         //Add and update buildings
-        buildings.load(cells, newcells);
+        Building.load(cells, newcells);
 
         //Add and update missiles
-        missiles.load(cells, newcells);
+        Missile.load(cells, newcells);
     }
-}
+}());

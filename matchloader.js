@@ -1,21 +1,28 @@
-function matchloaderClass(options) {
-    var options = options || {};
-    var currentfileIndex = options.currentfileIndex || 0;
-
-    var fileInput = d3.select("#fileInput");
-    var nextRoundButton = d3.select("#nextRoundButton");
-    var previousRoundButton = d3.select("#previousRoundButton");
-
+var Matchloader = (function () {
     const jsonFileName = "JsonMap.json";
     const filePathFilter = "A - ";
     const fileSortRegex = /Round ([0-9]+)\b/;
 
-    var files, callbackFn;
-    var reader = new FileReader();
+    var fileInput, nextRoundButton, previousRoundButton;
+    var currentfileIndex, files, callbackFn, reader;
 
+    /* =============== export public methods =============== */
     return {
+        init: init,
         start: start
     };
+
+    /* =================== public methods ================== */
+    function init(options) {
+        options = options || {};
+        currentfileIndex = options.currentfileIndex || 0;
+
+        fileInput = d3.select("#fileInput");
+        nextRoundButton = d3.select("#nextRoundButton");
+        previousRoundButton = d3.select("#previousRoundButton");
+
+        reader = new FileReader();
+    }
 
     function start(callback) {
         callbackFn = callback;
@@ -42,6 +49,7 @@ function matchloaderClass(options) {
             });
     }
 
+    /* =================== private methods ================= */
     function filefilterFunction(f) {
         return (f.name == jsonFileName && f.webkitRelativePath.includes(filePathFilter));
     };
@@ -52,11 +60,11 @@ function matchloaderClass(options) {
         return (aNum > bNum) ? 1 : -1;
     };
 
-    function loadFile(file) {       
-        reader.addEventListener("loadend", function (e) {          
+    function loadFile(file) {
+        reader.addEventListener("loadend", function (e) {
             callbackFn(JSON.parse(e.target.result));
         });
-       
+
         reader.readAsText(file);
     }
-}
+}());

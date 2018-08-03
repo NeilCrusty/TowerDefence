@@ -1,56 +1,74 @@
-function settingsClass(options) {
-    var options = options || { margins: {} }
+var Settings = (function () {
+    var instance;
 
     let margins = {
-        top: options.margins.top || 60,
-        bottom: options.margins.bottom || 20,
-        left: options.margins.left || 40,
-        right: options.margins.right || 40,
-        center: options.margins.center || 30,
-        tooltip: options.margins.tooltip || 150
+        top: 60,
+        bottom: 20,
+        left: 40,
+        right: 40,
+        center: 30,
+        tooltip: 150
     };
 
-    let legendheight = options.legendheight || 200;
-    let blockSize = options.blockSize || 50;
-    let mapWidth = options.mapWidth || 16;
-    let mapHeight = options.mapHeight || 8;
-    let playerTextY = options.playerTextY || 55;
+    let legendheight = 200;
+    let blockSize = 50;
+    let mapWidth = 16;
+    let mapHeight = 8;
+    let playerTextY = 55;
 
     let round = 0;
-    let players = [{ "playerType": "A" }, { "playerType": "B" }];    
+    let players = [{ "playerType": "A" }, { "playerType": "B" }];
 
-    return {        
-        update: update,
-        blockSize: getBlockSize,  
-        round: getRound,
-        players : getPlayers,   
-        totalWidth: getTotalWidth,
-        totalHeight: getTotalHeight,
-        playerTextX: getPlayerTextX,
-        playerTextY: getPlayerTextY,
-        buildingX: getBuildingX,
-        buildingY: getBuildingY,
-        buildingTextX: getBuildingTextX,
-        buildingTextY: getBuildingTextY,
-        missileX: getMissileX,
-        missileY: getMissileY,
-        missileTextX: getMissileTextX,
-        missileTextY: getMissileTextY,
-        tipDirection: getTipDirection,
-        tipOffset: getTipOffset,
-        legendX: getLegendX,
-        legendY: getLegendY,
-        legendBuildingTextX: getLegendBuildingTextX,
-        legendBuildingTextY: getLegendBuildingTextY,
-        legendTextX: getLegendTextX,
-        legendTextY: getLegendTextY
+    /* =============== export public methods =============== */
+    return {
+        getInstance: getInstance
     };
+
+    /* =================== public methods ================== */
+
+    function getInstance() {
+        if (!instance) {
+            instance = init();
+        }
+        return instance;
+    }
+
+    /* =================== private methods ================== */
+
+    function init() {
+        return {
+            update: update,
+            blockSize: getBlockSize,
+            round: getRound,
+            players: getPlayers,
+            totalWidth: getTotalWidth,
+            totalHeight: getTotalHeight,
+            playerTextX: getPlayerTextX,
+            playerTextY: getPlayerTextY,
+            buildingX: getBuildingX,
+            buildingY: getBuildingY,
+            buildingTextX: getBuildingTextX,
+            buildingTextY: getBuildingTextY,
+            missileX: getMissileX,
+            missileY: getMissileY,
+            missileTextX: getMissileTextX,
+            missileTextY: getMissileTextY,
+            tipDirection: getTipDirection,
+            tipOffset: getTipOffset,
+            legendX: getLegendX,
+            legendY: getLegendY,
+            legendBuildingTextX: getLegendBuildingTextX,
+            legendBuildingTextY: getLegendBuildingTextY,
+            legendTextX: getLegendTextX,
+            legendTextY: getLegendTextY
+        };
+    }
 
     function update(file) {
         mapWidth = file.gameDetails.mapWidth;
         mapHeight = file.gameDetails.mapHeight;
         round = file.gameDetails.round;
-        players = file.players;        
+        players = file.players;
     }
 
     function getBlockSize() {
@@ -149,7 +167,7 @@ function settingsClass(options) {
     };
 
     function getLegendBuildingTextY(c, i) {
-        return getLegendY(c, i)  + blockSize / 2;
+        return getLegendY(c, i) + blockSize / 2;
     };
 
     function getLegendTextX(c, i) {
@@ -159,4 +177,4 @@ function settingsClass(options) {
     function getLegendTextY(c, i) {
         return getLegendBuildingTextY(c, i);
     };
-}
+}());

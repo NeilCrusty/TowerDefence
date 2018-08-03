@@ -1,16 +1,13 @@
-let settings = settingsClass();
+window.onload = function () {
+    let parent = d3.select("body")
+        .append("div")
+        .attr("class", "svgContainer");
 
-let parent = d3.select("body")
-    .append("div")
-    .attr("class", "svgContainer");
+    GameMap.init({ parentSelection: parent });
 
-let map = mapClass({
-    parentSelection: parent,
-    settings: settings
-});
+    Matchloader.init({ currentfileIndex: 0 });
 
-let matchloader = matchloaderClass({ currentfileIndex: 0 });
-
-matchloader.start(function (file) {    
-    map.load(file);
-});
+    Matchloader.start(function (file) {
+        GameMap.load(file);
+    });
+}
