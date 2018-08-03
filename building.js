@@ -8,7 +8,7 @@ var Building = (function () {
     }
 
     /* =================== public methods ================== */
-    function init(options) {              
+    function init(options) {
         svg = options.svg;
         settings = Settings.getInstance();
 
@@ -39,25 +39,26 @@ var Building = (function () {
     }
 
     function load(cells, newCells) {
-        //register the tooltip events
+        //move the cell to the correct location and register the tooltip events
         newCells
+            .attr("transform", function (c, i) {
+                return "translate(" + settings.buildingX(c, i) + "," + settings.buildingY(c, i) + ")";
+            })
             .on('mouseover', buildingTip.show)
             .on('mouseout', buildingTip.hide);
 
         //Add new building rects
         newCells.append("rect")
-            .attr("x", settings.buildingX)
-            .attr("y", settings.buildingY)
             .attr("width", settings.blockSize)
             .attr("height", settings.blockSize)
             .attr("class", buildingClass);
 
         //Add new building texts
         newCells.append("text")
-            .attr("class", "buildingText")
-            .attr("x", settings.buildingTextX)
-            .attr("y", settings.buildingTextY)
-            .attr("alignment-baseline", "middle")
+            .attr("class", "buildingText")           
+            .attr("x", (c) => settings.blockSize() / 2)
+            .attr("y", (c) => settings.blockSize() / 2)
+            .attr("dominant-baseline", "middle")
             .attr("text-anchor", "middle")
             .text(buildingText);
 

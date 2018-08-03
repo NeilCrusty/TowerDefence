@@ -1,14 +1,14 @@
 var Missile = (function () {
     let settings, svg, missileTip;
 
-     /* =============== export public methods =============== */
+    /* =============== export public methods =============== */
     return {
         init: init,
         load: load
     }
 
     /* =================== public methods ================== */
-    function init(options) {         
+    function init(options) {
         svg = options.svg;
         settings = Settings.getInstance();
 
@@ -52,8 +52,11 @@ var Missile = (function () {
             .append("g")
             .attr("class", "missileContainer");
 
-        //register the tooltip events
+        //move the group to the correct location and register the tooltip events
         newMissiles
+             .attr("transform", function (c, i) {
+                 return "translate(" + settings.missileX(c, i) + "," + settings.missileY(c, i) + ")  ";
+             })
             .on("mouseover", function () { d3.event.stopPropagation(); }) //dont show the building tip from rect
             .on("mouseover.log", missileTip.show)
             .on('mouseout', missileTip.hide);
@@ -64,15 +67,15 @@ var Missile = (function () {
             .attr("class", "missile")
             .attr("d", d3.symbol().type(d3.symbolTriangle).size(150))
             .attr("transform", function (c, i) {
-                return "translate(" + settings.missileX(c, i) + "," + settings.missileY(c, i) + ") rotate(" + missileRotation(c, i) + ") ";
-            });
+                return "rotate(" + missileRotation(c, i) + ") ";
+            });           
 
         //Add the missile text
         newMissiles
             .append("text")
-            .attr("class", "missileText")
-            .attr("x", (c, i) => settings.missileTextX(c, i))
-            .attr("y", (c, i) => settings.missileTextY(c, i))
+            .attr("class", "missileText")           
+            .attr("dominant-baseline", "middle")
+            .attr("text-anchor", "middle")
             .text((c, i) => c.missiles.length);
 
         //Upate the missile texts

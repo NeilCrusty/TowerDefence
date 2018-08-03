@@ -47,20 +47,12 @@ var Settings = (function () {
             playerTextY: getPlayerTextY,
             buildingX: getBuildingX,
             buildingY: getBuildingY,
-            buildingTextX: getBuildingTextX,
-            buildingTextY: getBuildingTextY,
             missileX: getMissileX,
-            missileY: getMissileY,
-            missileTextX: getMissileTextX,
-            missileTextY: getMissileTextY,
+            missileY: getMissileY,           
             tipDirection: getTipDirection,
             tipOffset: getTipOffset,
             legendX: getLegendX,
-            legendY: getLegendY,
-            legendBuildingTextX: getLegendBuildingTextX,
-            legendBuildingTextY: getLegendBuildingTextY,
-            legendTextX: getLegendTextX,
-            legendTextY: getLegendTextY
+            legendY: getLegendY     
         };
     }
 
@@ -111,29 +103,12 @@ var Settings = (function () {
         return c.y * blockSize + margins.top;
     };
 
-    function getBuildingTextX(c) {
-        return getBuildingX(c) + blockSize / 2;
+    function getMissileX(c, i) {       
+        return (c.playerType == "A") ? blockSize - 10 : 10;
     };
 
-    function getBuildingTextY(c) {
-        return getBuildingY(c) + blockSize / 2;
-    };
-
-    function getMissileX(c, i) {
-        let size = getBuildingX(c);
-        return (c.playerType == "A") ? size + blockSize - 10 : size + 10;
-    };
-
-    function getMissileY(c, i) {
-        return getBuildingY(c) + blockSize / 2;
-    };
-
-    function getMissileTextX(c, i) {
-        return getMissileX(c, i) - 6;
-    };
-
-    function getMissileTextY(c, i) {
-        return getMissileY(c, i) + 4;
+    function getMissileY(c, i) {        
+        return blockSize / 2;
     };
 
     function getTipDirection(c, el) {
@@ -160,21 +135,5 @@ var Settings = (function () {
 
     function getLegendY(c, i) {
         return margins.top + mapHeight * blockSize + margins.bottom + (i * blockSize)
-    };
-
-    function getLegendBuildingTextX(c, i) {
-        return getLegendX(c, i) + blockSize / 2;
-    };
-
-    function getLegendBuildingTextY(c, i) {
-        return getLegendY(c, i) + blockSize / 2;
-    };
-
-    function getLegendTextX(c, i) {
-        return margins.left + blockSize + 10;
-    };
-
-    function getLegendTextY(c, i) {
-        return getLegendBuildingTextY(c, i);
-    };
+    };   
 }());

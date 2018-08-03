@@ -26,13 +26,14 @@ var Legend = (function () {
         var newLegends = legends
             .enter()
             .append("g")
-            .attr("class", "legend");
+            .attr("class", "legend")
+            .attr("transform", function (c, i) {
+                return "translate(" + settings.legendX(c, i) + "," + settings.legendY(c, i) + ")";
+            });
 
         //Add the building rects
         newLegends
-            .append("rect")
-            .attr("x", settings.legendX)
-            .attr("y", settings.legendY)
+            .append("rect")           
             .attr("width", settings.blockSize)
             .attr("height", settings.blockSize)
             .attr("class", function (c, i) {
@@ -42,20 +43,20 @@ var Legend = (function () {
         //Add the building texts
         newLegends
             .append("text")
-            .attr("x", settings.legendBuildingTextX)
-            .attr("y", settings.legendBuildingTextY)
+            .attr("x", (c) => settings.blockSize() / 2)
+            .attr("y", (c) => settings.blockSize() / 2)
             .attr("class", "buildingText")
-            .attr("alignment-baseline", "middle")
+            .attr("dominant-baseline", "middle")
             .attr("text-anchor", "middle")
             .text(function (c, i) { return c.key[0]; });
 
         //Add the legend detail
         newLegends
             .append("text")
-            .attr("x", settings.legendTextX)
-            .attr("y", settings.legendTextY)
+            .attr("x", (c) => settings.blockSize() + 10)
+            .attr("y", (c) => settings.blockSize() / 2)
             .attr("class", "legendText")
-            .attr("alignment-baseline", "middle")
+            .attr("dominant-baseline", "middle")
             .text(function (c, i) {
                 return "Name: " + c.key
                     + " Health: " + c.value['health']
