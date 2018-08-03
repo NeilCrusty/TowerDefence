@@ -10,7 +10,7 @@ var Settings = (function () {
         tooltip: 150
     };
 
-    let legendheight = 200;
+    let legendheight = 220;
     let blockSize = 50;
     let mapWidth = 16;
     let mapHeight = 8;
