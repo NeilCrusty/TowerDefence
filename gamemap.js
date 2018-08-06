@@ -32,7 +32,7 @@ var GameMap = (function() {
             svg.append("text")
                 .attr("x", settings.playerTextX(p, i))
                 .attr("y", settings.playerTextY(p, i))
-                .attr("class", "smallText")
+                .attr("class", "playerText")
                 .attr("id", "player" + p.playerType + "Text");
         });
 
@@ -67,11 +67,38 @@ var GameMap = (function() {
         settings.players().forEach(function (p, i) {
             svg.select("#player" + p.playerType + "Text")
                 .attr("x", settings.playerTextX(p, i))
-                .text("Player: " + p.playerType
-                    + " Energy: " + p.energy
-                    + " Health: " + p.health
-                    + " HitsTaken: " + p.hitsTaken
-                    + " Score: " + p.score);
+                .text("Player: ")
+                .append("tspan")
+                .attr("class", "playerTextHighlight")
+                .text(p.playerType)
+
+                .append("tspan")
+                .attr("class", "playerText")
+                .text(" Energy: ")
+                .append("tspan")
+                .attr("class", "playerTextHighlight")
+                .text(p.energy)
+
+                .append("tspan")
+                .attr("class", "playerText")
+                .text(" Health: ")
+                .append("tspan")
+                .attr("class", "playerTextHighlight")
+                .text(p.health)
+
+                .append("tspan")
+                .attr("class", "playerText")
+                .text(" Hits Taken: ")
+                .append("tspan")
+                .attr("class", "playerTextHighlight")
+                .text(p.hitsTaken)
+
+                .append("tspan")
+                .attr("class", "playerText")
+                .text(" Score: ")
+                .append("tspan")
+                .attr("class", "playerTextHighlight")
+                .text(p.score);
         });
     }
 

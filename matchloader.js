@@ -61,6 +61,9 @@ var Matchloader = (function () {
     };
 
     function loadFile(file) {
+        previousRoundButton.attr("disabled", (currentfileIndex == 0) ? "true" : null);
+        nextRoundButton.attr("disabled", (currentfileIndex == files.length - 1) ? "true" : null);
+
         reader.addEventListener("loadend", function (e) {
             callbackFn(JSON.parse(e.target.result));
         });

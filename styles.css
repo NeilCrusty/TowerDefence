@@ -1,35 +1,15 @@
-
-
-/* 
-Dark Cyan #0560B7
-
-Dark Red #870405
-
-Purple #340433
-
-Midnight Blue #1F2768
-
-Midnight Blue #241C54 
-
-#330033
-#0066BB
-#880000
-
-*/
-
 body {
     padding: 0px;
-    margin: 0px;
-    background-color: #330033;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90' viewBox='0 0 90 90'%3E%3Ccircle fill='%2306B' cx='45' cy='45' r='10'/%3E%3Cg fill='%23800' fill-opacity='1'%3E%3Ccircle cx='0' cy='90' r='10'/%3E%3Ccircle cx='90' cy='90' r='10'/%3E%3Ccircle cx='90' cy='0' r='10'/%3E%3Ccircle cx='0' cy='0' r='10'/%3E%3C/g%3E%3C/svg%3E");
-  
+    margin: 0px;   
+    background-color: #480075;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 200 200'%3E%3Cdefs%3E%3ClinearGradient id='a' gradientUnits='userSpaceOnUse' x1='100' y1='33' x2='100' y2='-3'%3E%3Cstop offset='0' stop-color='%23000' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23000' stop-opacity='1'/%3E%3C/linearGradient%3E%3ClinearGradient id='b' gradientUnits='userSpaceOnUse' x1='100' y1='135' x2='100' y2='97'%3E%3Cstop offset='0' stop-color='%23000' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23000' stop-opacity='1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg fill='%233d0063' fill-opacity='0.6'%3E%3Crect x='100' width='100' height='100'/%3E%3Crect y='100' width='100' height='100'/%3E%3C/g%3E%3Cg fill-opacity='0.5'%3E%3Cpolygon fill='url(%23a)' points='100 30 0 0 200 0'/%3E%3Cpolygon fill='url(%23b)' points='100 100 0 130 0 100 200 100 200 130'/%3E%3C/g%3E%3C/svg%3E");
     /* background by SVGBackgrounds.com */
 }
 
 svg {
     background-color:rgba(0, 0, 0, 0.5);
     box-shadow: inset 0 0 0 3000px rgba(255, 255, 255, 0.336); 
-    border: 5px solid black;
+    border: 2px solid black;
 }
 
 rect {
@@ -38,8 +18,7 @@ rect {
 }
 
 input[type="button" i] {
-    background-color: #0560B7 ; 
-    border: 3px solid black;
+    border: 2px solid black;
     color: black;
     padding: 5px 10px;
     text-align: center;
@@ -47,12 +26,22 @@ input[type="button" i] {
     font-weight: bold;
     display: inline-block;
     font-size: 14px;
-    margin: 5px 0px;
+    margin: 10px 0px 5px 0px;
 }
 
 #loadFileXml {
-    background-color:#870405;
-    margin: 5px 15px;
+    margin: 10px 50px 5px 0px;
+}
+
+input[type="button"]:disabled {
+    opacity: 0.60; 
+    cursor: not-allowed;  
+}
+
+.navigationContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .svgContainer {
@@ -61,25 +50,34 @@ input[type="button" i] {
     justify-content: center;
 }
 
-.smallText {
+.playerText {
+    font-family: Arial;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.playerTextHighlight {
     font-family: Arial;
     font-size: 13px;
-    font-weight: bold;
-    fill: black;
+    font-weight: 800;   
 }
 
 .bigText {
     font-family: Arial;
     font-size: 24px;
-    font-weight: bold;
-    fill: black;
+    font-weight: bold;  
 }
 
 .legendText {
     font-family: Arial;
     font-size: 10px;
-    font-weight: bold;
-    fill: black;
+    font-weight: bold; 
+}
+
+.legendTextHighlight {
+    font-family: Arial;
+    font-size: 11px;
+    font-weight: 800;
 }
 
 .buildingText {
@@ -173,7 +171,7 @@ input[type="button" i] {
 }
 
 .tesla {
-    fill: #340433;  
+    fill: #5a0659;  
     stroke: black;
     stroke-width: 2;
 }
