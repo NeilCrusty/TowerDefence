@@ -171,16 +171,13 @@ input[type="button"]:disabled {
 }
 
 .tesla {
-    fill: #5a0659;  
+    fill: #ad750b;  
     stroke: black;
     stroke-width: 2;
 }
 
 .missile {
     fill: yellow;
-    /* fill-opacity: 1; */
-    stroke: black;
-    /* stroke-opacity: .5; */
-    /* pointer-events: all; */
+    stroke: black;    
     stroke-width: 2;
 }

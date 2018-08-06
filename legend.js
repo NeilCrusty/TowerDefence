@@ -52,72 +52,37 @@ var Legend = (function () {
             .text(function (c, i) { return c.key[0]; });
 
         //Add the legend detail
-        newLegends
+        var legendDesc = newLegends
             .append("text")
             .attr("x", (c) => settings.blockSize() + 5)
             .attr("y", (c) => settings.blockSize() / 2)
-            .attr("class", "legendText")
-            .attr("dominant-baseline", "middle")
+            .attr("dominant-baseline", "middle");
 
-            .text("Name: ")
-            .append("tspan")
-            .attr("class", "legendTextHighlight")
-            .text((c, i) => c.key)
-
+        legendDesc
             .append("tspan")
             .attr("class", "legendText")
-            .text((c, i) => " Health: ")
-            .append("tspan")
+            .text("Name: ");
+        legendDesc.append("tspan")
             .attr("class", "legendTextHighlight")
-            .text((c, i) => c.value['health'])
+            .text((c, i) => c.key);
 
-            .append("tspan")
-            .attr("class", "legendText")
-            .text((c, i) => " Construction Time: ")
-            .append("tspan")
-            .attr("class", "legendTextHighlight")
-            .text((c, i) => c.value['constructionTime'])
+        addTspan(legendDesc, "Health", "health");
+        addTspan(legendDesc, "Construction Time", "constructionTime");
+        addTspan(legendDesc, "Price", "price");
+        addTspan(legendDesc, "Energy Generated", "energyGeneratedPerTurn");
+        addTspan(legendDesc, "Weapon Damage", "weaponDamage");
+        addTspan(legendDesc, "Weapon Speed", "weaponSpeed");
+        addTspan(legendDesc, "Weapon Cooldown", "weaponCooldownPeriod");
+        addTspan(legendDesc, "Construction Score", "constructionScore");
+    }
 
-            .append("tspan")
+    function addTspan(element, name, value) {
+        element.append("tspan")
             .attr("class", "legendText")
-            .text((c, i) => " Price: ")
-            .append("tspan")
-            .attr("class", "legendTextHighlight")
-            .text((c, i) => c.value['price'])
+            .text(" " + name + ": ");
 
-            .append("tspan")
-            .attr("class", "legendText")
-            .text((c, i) => " Energy Generated: ")
-            .append("tspan")
+        element.append("tspan")
             .attr("class", "legendTextHighlight")
-            .text((c, i) => c.value['energyGeneratedPerTurn'])
-
-            .append("tspan")
-            .attr("class", "legendText")
-            .text((c, i) => " Weapon Damage: ")
-            .append("tspan")
-            .attr("class", "legendTextHighlight")
-            .text((c, i) => c.value['weaponDamage'])
-
-            .append("tspan")
-            .attr("class", "legendText")
-            .text((c, i) => " Weapon Speed: ")
-            .append("tspan")
-            .attr("class", "legendTextHighlight")
-            .text((c, i) => c.value['weaponSpeed'])
-
-            .append("tspan")
-            .attr("class", "legendText")
-            .text((c, i) => " Weapon Cooldown: ")
-            .append("tspan")
-            .attr("class", "legendTextHighlight")
-            .text((c, i) => c.value['weaponCooldownPeriod'])
-
-            .append("tspan")
-            .attr("class", "legendText")
-            .text((c, i) => " Construction Score: ")
-            .append("tspan")
-            .attr("class", "legendTextHighlight")
-            .text((c, i) => c.value['constructionScore']);
+            .text((c, i) => c.value[value]);
     }
 }());

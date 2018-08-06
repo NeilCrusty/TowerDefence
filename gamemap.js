@@ -1,9 +1,9 @@
-var GameMap = (function() {
+var GameMap = (function () {
     var settings, parentSelection, svg, roundText;
-   
+
     /* =============== export public methods =============== */
     return {
-        init : init,
+        init: init,
         load: load
     };
 
@@ -12,7 +12,7 @@ var GameMap = (function() {
         var options = options || {}
         parentSelection = options.parentSelection || d3.select("body");
 
-        settings = Settings.getInstance();        
+        settings = Settings.getInstance();
 
         //Create the SVG element
         svg = parentSelection.append("svg")
@@ -32,7 +32,6 @@ var GameMap = (function() {
             svg.append("text")
                 .attr("x", settings.playerTextX(p, i))
                 .attr("y", settings.playerTextY(p, i))
-                .attr("class", "playerText")
                 .attr("id", "player" + p.playerType + "Text");
         });
 
@@ -47,7 +46,7 @@ var GameMap = (function() {
         loadSvg();
         loadTexts();
         loadMap(file.gameMap);
-        
+
         Legend.load(file.gameDetails.buildingsStats);
     }
 
@@ -65,41 +64,27 @@ var GameMap = (function() {
 
         //Update the players text elements
         settings.players().forEach(function (p, i) {
-            svg.select("#player" + p.playerType + "Text")
+            var playerDesc = svg
+                .select("#player" + p.playerType + "Text")
                 .attr("x", settings.playerTextX(p, i))
-                .text("Player: ")
-                .append("tspan")
-                .attr("class", "playerTextHighlight")
-                .text(p.playerType)
+                .text("");
 
-                .append("tspan")
-                .attr("class", "playerText")
-                .text(" Energy: ")
-                .append("tspan")
-                .attr("class", "playerTextHighlight")
-                .text(p.energy)
-
-                .append("tspan")
-                .attr("class", "playerText")
-                .text(" Health: ")
-                .append("tspan")
-                .attr("class", "playerTextHighlight")
-                .text(p.health)
-
-                .append("tspan")
-                .attr("class", "playerText")
-                .text(" Hits Taken: ")
-                .append("tspan")
-                .attr("class", "playerTextHighlight")
-                .text(p.hitsTaken)
-
-                .append("tspan")
-                .attr("class", "playerText")
-                .text(" Score: ")
-                .append("tspan")
-                .attr("class", "playerTextHighlight")
-                .text(p.score);
+            addTspan(playerDesc, "Player", p.playerType);
+            addTspan(playerDesc, "Energy", p.energy);
+            addTspan(playerDesc, "Health", p.health);
+            addTspan(playerDesc, "Hits Taken", p.hitsTaken);
+            addTspan(playerDesc, "Score", p.score);
         });
+    }
+
+    function addTspan(element, name, value) {
+        element.append("tspan")
+            .attr("class", "playerText")
+            .text(" " + name + ": ");
+
+        element.append("tspan")
+            .attr("class", "playerTextHighlight")
+            .text(value);
     }
 
     function loadMap(gameMap) {
