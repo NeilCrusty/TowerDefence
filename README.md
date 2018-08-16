@@ -10,7 +10,7 @@ I hope others find it useful in replaying their matches and honing their strateg
 
 ### Screenshot
 
-![](assets/map_view.png)
+![Image of the game map](https://github.com/NeilCrusty/TowerDefence/blob/master/assets/map_view.png)
 
 ### How to use it
 
