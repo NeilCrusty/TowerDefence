@@ -1,37 +1,27 @@
-## Welcome to GitHub Pages
+## Yet another Entelect Challenge 2018 Visualiser
 
-You can use the [editor on GitHub](https://github.com/NeilCrusty/TowerDefence/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+It's a bit late to the party, but as the title suggests, here is yet another visualiser for the [Entelect Challenge 2018 - Tower Defence](https://challenge.entelect.co.za/). 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+It's built in JavaScript using the powerfull [D3 JS](https://d3js.org/) library and SVG. I used the visualiser as a pet project to learn some D3.
 
-### Markdown
+It is hosted in **GitHub Pages**, built from the **master** branch. Here is the Url: https://neilcrusty.github.io/TowerDefence/
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+I hope others find it useful in replaying their matches and honing their strategies.
 
-```markdown
-Syntax highlighted code block
+### Screenshot
 
-# Header 1
-## Header 2
-### Header 3
+![](assets/map_view.png)
 
-- Bulleted
-- List
+### How to use it
 
-1. Numbered
-2. List
 
-**Bold** and _Italic_ and `Code` text
+1. Follow the instructions on the [Entelect Challenge](https://challenge.entelect.co.za/) website. Download the starter pack and run your first bot match.
+2. Each time you run a match a **timestamped** folder is created under the tower-defence-matches folder. i.e. \tower-defence-matches\\**2018.08.14.14.52.31**
+3. In the [Visualiser](https://neilcrusty.github.io/TowerDefence/), click on the **Load Match** button and select a match folder. The `JsonMap.json` files for all the rounds will be used to render the game map.
+4. The **Next Round** and **Previous Round** buttons will allow you to step through the match.
+5. Hovering over buildings and missiles will show a tooltip with extra information.
 
-[Link](url) and ![Image](src)
-```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+### Disclaimer ###
 
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/NeilCrusty/TowerDefence/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+The source code is public and open. There is no storing of match logs so your strategies are safe. :wink: You are welcome to clone the repo and run it locally via your pc's file system
