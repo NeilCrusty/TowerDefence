@@ -2,7 +2,7 @@
 
 It's a bit late to the party, but as the title suggests, here is yet another visualiser for the [Entelect Challenge 2018 - Tower Defence](https://challenge.entelect.co.za/). 
 
-It's built in JavaScript using the powerfull [D3 JS](https://d3js.org/) library and SVG. I used the visualiser as a pet project to learn some D3.
+It's built in JavaScript using the powerfull [D3.js](https://d3js.org/) library and SVG. I used the visualiser as a pet project to learn some D3.
 
 It is hosted in **GitHub Pages**, built from the **master** branch. Here is the Url: https://neilcrusty.github.io/TowerDefence/
 
