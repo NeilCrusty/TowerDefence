@@ -6,7 +6,7 @@ var Settings = (function () {
         bottom: 20,
         left: 40,
         right: 40,
-        center: 30,
+        center: 40,
         tooltip: 150
     };
 
@@ -39,12 +39,18 @@ var Settings = (function () {
         return {
             update: update,
             blockSize: getBlockSize,
+            margins: getMargins,
+            mapHeight: getMapHeight,
             round: getRound,
             players: getPlayers,
             totalWidth: getTotalWidth,
             totalHeight: getTotalHeight,
             playerTextX: getPlayerTextX,
             playerTextY: getPlayerTextY,
+            ironCurtainX: getIronCurtainX,
+            ironCurtainY: getIronCurtainY,
+            ironCurtainWidth: getIronCurtainWidth,
+            ironCurtainHeight: getIronCurtainHeight,
             buildingX: getBuildingX,
             buildingY: getBuildingY,
             missileX: getMissileX,
@@ -65,6 +71,14 @@ var Settings = (function () {
 
     function getBlockSize() {
         return blockSize;
+    }
+
+    function getMargins() {
+        return margins;
+    }
+
+    function getMapHeight() {
+        return mapHeight;
     }
 
     function getRound() {
@@ -98,6 +112,23 @@ var Settings = (function () {
         }
         return size;
     };
+
+    function getIronCurtainX(p, i) {
+        let xStart = margins.left + mapWidth / 2 * blockSize;
+        return (i == 0) ? xStart : xStart + (margins.center / 2);
+    };
+
+    function getIronCurtainY(p, i) {
+        return margins.top;
+    }
+
+    function getIronCurtainWidth() {
+        return margins.center / 2;
+    }
+
+    function getIronCurtainHeight() {
+        return mapHeight * blockSize;
+    }
 
     function getBuildingY(c) {
         return c.y * blockSize + margins.top;

@@ -7,7 +7,7 @@
 </head>
 <body>  
     <form class="navigationContainer">
-        <input id="loadFileXml" type="button" value="Load Match" onclick="document.getElementById('fileInput').click();" />
+        <input id="loadFileXml" type="button" value="Load Match" onclick="this.form.reset(); document.getElementById('fileInput').click();" />
         <input id="fileInput" type="file" webkitdirectory style="display:none;"/>
         <input id="previousRoundButton" type="button" value="< Previous Round" disabled/>
         <input id="nextRoundButton" type="button" value="Next Round >" disabled/>

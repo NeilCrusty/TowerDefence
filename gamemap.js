@@ -30,9 +30,26 @@ var GameMap = (function () {
         //Create the players text elements
         settings.players().forEach(function (p, i) {
             svg.append("text")
+                .attr("x", p.playerType == "A" ? "25%" : "75%")
+                .attr("y", 25)
+                .attr("class", "playerTextBig")
+                .attr("alignment-baseline", "middle")
+                .attr("text-anchor", "middle")
+                .text("Player: " + p.playerType);
+
+            svg.append("text")
                 .attr("x", settings.playerTextX(p, i))
                 .attr("y", settings.playerTextY(p, i))
                 .attr("id", "player" + p.playerType + "Text");
+
+            //Create the iron curtain
+            svg.append("g")
+               .attr("id", "ironCurtain" + p.playerType)               
+               .attr("transform", "translate(" + settings.ironCurtainX(p, i) + "," + settings.ironCurtainY(p, i) + ")")
+               .append("rect")
+               .classed("ironCurtain", p.activeIronCurtainLifetime > 0)
+               .attr("width", settings.ironCurtainWidth())
+               .attr("height", settings.ironCurtainHeight());           
         });
 
         Building.init({ svg: svg });
@@ -44,7 +61,8 @@ var GameMap = (function () {
         settings.update(file);
 
         loadSvg();
-        loadTexts();
+        loadRound();
+        loadPlayers();
         loadMap(file.gameMap);
 
         Legend.load(file.gameDetails.buildingsStats);
@@ -57,23 +75,33 @@ var GameMap = (function () {
             .attr("height", settings.totalHeight());
     }
 
-    function loadTexts() {
+    function loadRound() {
         //Update the round text element
         roundText
             .text("Round: " + settings.round());
+    }
 
-        //Update the players text elements
+    function loadPlayers() {               
         settings.players().forEach(function (p, i) {
+            //Update the players text elements
             var playerDesc = svg
                 .select("#player" + p.playerType + "Text")
                 .attr("x", settings.playerTextX(p, i))
-                .text("");
-
-            addTspan(playerDesc, "Player", p.playerType);
+                .text("");            
             addTspan(playerDesc, "Energy", p.energy);
             addTspan(playerDesc, "Health", p.health);
             addTspan(playerDesc, "Hits Taken", p.hitsTaken);
             addTspan(playerDesc, "Score", p.score);
+            addTspan(playerDesc, "Iron Curtain", p.ironCurtainAvailable ? "Yes" : "No");
+
+            //Update the iron curtain
+            svg
+                .select("#ironCurtain" + p.playerType)  
+                .attr("transform", "translate(" + settings.ironCurtainX(p, i) + "," + settings.ironCurtainY(p, i) + ")")
+                .select("rect")
+                .classed("ironCurtain", p.activeIronCurtainLifetime > 0)
+                .attr("width", settings.ironCurtainWidth())
+                .attr("height", settings.ironCurtainHeight());           
         });
     }
 
@@ -112,6 +140,6 @@ var GameMap = (function () {
         Building.load(cells, newcells);
 
         //Add and update missiles
-        Missile.load(cells, newcells);
+        Missile.load(cells, newcells); 
     }
 }());

@@ -50,6 +50,12 @@ input[type="button"]:disabled {
     justify-content: center;
 }
 
+.playerTextBig {
+    font-family: Arial;
+    font-size: 20px;
+    font-weight: bold;  
+}
+
 .playerText {
     font-family: Arial;
     font-size: 12px;
@@ -181,3 +187,9 @@ input[type="button"]:disabled {
     stroke: black;    
     stroke-width: 2;
 }
+
+.ironCurtain {
+    fill: #43464B;
+    stroke: black;    
+    stroke-width: 2;
+} 
