@@ -4,7 +4,7 @@ It's a bit late to the party, but as the title suggests, here is yet another vis
 
 It's built in JavaScript using the powerfull [D3.js](https://d3js.org/) library and SVG. I used the visualiser as a pet project to learn some D3.
 
-It is hosted in **GitHub Pages**, built from the **master** branch. Here is the Url: https://neilcrusty.github.io/TowerDefence/
+It is hosted in [**GitHub Pages**](https://pages.github.com/), built from the **master** branch. Here is the url: https://neilcrusty.github.io/TowerDefence/
 
 I hope others find it useful in replaying their matches and honing their strategies.
 
